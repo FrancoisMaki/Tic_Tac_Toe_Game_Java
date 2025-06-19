@@ -11,8 +11,10 @@ public class Main {
     public static void game(){
         char [][] base = new char[3][3];
         boolean p1Turn;
+
         System.out.println("Game Start");
         printArrray(base);
+
         do {
             System.out.println("1st Player Turn");
             p1Turn=true;
@@ -27,7 +29,10 @@ public class Main {
             printArrray(base);
 
             System.out.println("--------------------------------------------------\n\n");
-        }while (1!=0);
+
+        }while (winCheck(base));
+
+        System.out.println("GAME OVER");
     }
 
     private static void insert(char[][] base, boolean p1Turn){
@@ -58,7 +63,25 @@ public class Main {
         }
     }
 
+    private static boolean winCheck(char[][] base) {
+        // Filas
+        for (int i = 0; i < 3; i++) {
+            if (base[i][0] != ' ' && base[i][0] == base[i][1] && base[i][1] == base[i][2])
+                return true;
+        }
+        // Columnas
+        for (int i = 0; i < 3; i++) {
+            if (base[0][i] != ' ' && base[0][i] == base[1][i] && base[1][i] == base[2][i])
+                return true;
+        }
+        // Diagonales
+        if (base[0][0] != ' ' && base[0][0] == base[1][1] && base[1][1] == base[2][2])
+            return true;
+        if (base[0][2] != ' ' && base[0][2] == base[1][1] && base[1][1] == base[2][0])
+            return true;
 
+        return false;
+    }
 
     private static void printArrray(char[][] base){
         for (char[] chars : base) {
